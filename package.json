@@ -1,7 +1,7 @@
 {
-  "name": "javascript-action",
+  "name": "pending-response",
   "version": "1.0.0",
-  "description": "JavaScript Action Template",
+  "description": "Add and remove `response` issue labels based on team membership.",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
@@ -11,21 +11,25 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/siegerts/pending-response.git"
   },
   "keywords": [
     "GitHub",
     "Actions",
-    "JavaScript"
+    "JavaScript",
+    "issues",
+    "pending response",
+    "wait for reponse"
   ],
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/actions/javascript-action/issues"
+    "url": "https://github.com/siegerts/pending-response/issues"
   },
-  "homepage": "https://github.com/actions/javascript-action#readme",
+  "homepage": "https://github.com/siegerts/pending-response#readme",
   "dependencies": {
-    "@actions/core": "^1.2.5"
+    "@actions/core": "^1.2.5",
+    "@actions/github": "^4.0.0"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.27.0",

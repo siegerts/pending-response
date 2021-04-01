@@ -1,13 +1,21 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: "Pending Response"
+description: "Add and remove `response` issue labels based on team membership."
+author: siegerts
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  github-token:
+    description: The GitHub token used to create an authenticated client
+    default: ${{ github.token }}
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps
-    description: 'The message to output'
+  member-associations:
+    #https://docs.github.com/en/graphql/reference/enums#commentauthorassociation
+    description: 'Separate multiple associations with commas (eg. "OWNER, MEMBER")'
+    default: "OWNER, MEMBER, COLLABORATOR"
+  pending-response-label:
+    description: Label to remove indicating that a reponse is required for further action
+    required: true
+  actionable-label:
+    description: Label added to indicate that a user has responded
+
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"
