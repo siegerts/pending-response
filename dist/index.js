@@ -8,14 +8,14 @@ require('./sourcemap-register.js');module.exports =
 const github = __nccwpck_require__(5438);
 const core = __nccwpck_require__(2186);
 
+const wordsToArray = __nccwpck_require__(6688);
+
 /**
- * Follow up on issues and PRs, open or closed/merged,
- * after a release is published. The `pending-release`
- * label will also be removed if it's present.
+ * On issue comment by a non-repo member (memberAssociations),
+ * remove the `pendingResponseLabel`, if present.
  *
- * The relevant issues are parsed from the release
- * changelog and only recognized if present in the
- * current repo (i.e. where the release is published).
+ * Optionally, add a follow up label (actionableLabel) to
+ * indicate that an action is required by the team.
  *
  */
 
@@ -24,27 +24,69 @@ async function run() {
 
   // core.getInput treats YAML booleans as strings
   // https://github.com/actions/toolkit/issues/361
-  const dryRun =
-    (core.getInput("dry-run", { required: false }) || "false") === "true";
+  // const dryRun =
+  //   (core.getInput("dry-run", { required: false }) || "false") === "true";
 
   const pendingResponseLabel = core.getInput("pending-response-label", {
     required: true,
   });
 
-  const teams = core.getInput("teams", { required: true });
+  const actionableLabel = core.getInput("actionable-label") || "";
 
-  const octo = github.getOctokit(token);
+  // https://docs.github.com/en/graphql/reference/enums#commentauthorassociation
+  const memberAssociations = wordsToArray(
+    core.getInput("member-associations") || "OWNER, MEMBER, COLLABORATOR"
+  );
+
+  if (!memberAssociations?.length) {
+    return core.setFailed(
+      "At least one Comment Author Association is required."
+    );
+  }
 
   // context
   const context = github.context;
   const repo = context.repo;
-  const release = context.payload.release;
+  const issue = context.payload.issue;
+  const comment = context.payload.comment;
 
-  if (!repo || !release) {
-    core.setFailed(error.message);
+  if (!repo || !comment) {
+    core.setFailed(
+      "Missing repo or comment information from the event payload"
+    );
   }
 
-  core.info(`Run mode: ${dryRun ? "dry-run" : "production"}`);
+  // core.info(`Run mode: ${dryRun ? "dry-run" : "production"}`);
+
+  const commentAuthorAssociation = comment.author_association;
+  const isMember = memberAssociations.includes(commentAuthorAssociation);
+  const labels = issue.labels || [];
+
+  // not team member and includes pending response label
+  if (!isMember && labels.includes(pendingResponseLabel)) {
+    core.info(`Updating issue #${issue.number}...`);
+    core.info(`--Removing <${pendingResponseLabel}> label...`);
+
+    const octo = github.getOctokit(token);
+
+    await octo.issues.removeLabel({
+      owner: repo.owner,
+      repo: repo.repo,
+      issue_number: context.issue.number,
+      name: pendingResponseLabel,
+    });
+
+    // if configured, add follow up label
+    if (actionableLabel) {
+      core.info(`--Adding <${actionableLabel}> label...`);
+      await octo.issues.addLabels({
+        owner: repo.owner,
+        repo: repo.repo,
+        issue_number: issueNumber,
+        labels: [actionableLabel],
+      });
+    }
+  }
 }
 
 run();
@@ -5981,6 +6023,21 @@ function wrappy (fn, cb) {
     return ret
   }
 }
+
+
+/***/ }),
+
+/***/ 6688:
+/***/ ((module) => {
+
+let wordsToArray = function (words) {
+  if (!words.length) {
+    return [];
+  }
+  return words.split(",").map((word) => word.trim().toUpperCase());
+};
+
+module.exports = wordsToArray;
 
 
 /***/ }),
