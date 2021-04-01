@@ -76,7 +76,7 @@ async function run() {
     await octo.issues.removeLabel({
       owner: repo.owner,
       repo: repo.repo,
-      issue_number: context.issue.number,
+      issue_number: issue.number,
       name: pendingResponseLabel,
     });
 
@@ -86,7 +86,7 @@ async function run() {
       await octo.issues.addLabels({
         owner: repo.owner,
         repo: repo.repo,
-        issue_number: issueNumber,
+        issue_number: issue.number,
         labels: [actionableLabel],
       });
     }
