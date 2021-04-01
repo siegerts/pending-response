@@ -11,13 +11,13 @@ inputs:
     required: true
   member-associations:
     #https://docs.github.com/en/graphql/reference/enums#commentauthorassociation
-    description: 'Separate multiple associations with commas (eg. "OWNER, MEMBER")'
+    description: 'Repository associations that are considered part of the team. Separate multiple with commas (eg. "OWNER, MEMBER")'
     default: "OWNER, MEMBER, COLLABORATOR"
   pending-response-label:
-    description: Label to remove indicating that a reponse is required for further action
+    description: Label to remove indicating that a response is required for further action
     required: true
   actionable-label:
-    description: Label added to indicate that a user has responded
+    description: Label added to highlight that a user has responded and a follow-up is required
 
 runs:
   using: "node12"

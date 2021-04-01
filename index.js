@@ -8,7 +8,7 @@ const wordsToArray = require("./wordsToArray");
  * remove the `pendingResponseLabel`, if present.
  *
  * Optionally, add a follow up label (actionableLabel) to
- * indicate that an action is required by the teeam.
+ * indicate that an action is required by the team.
  *
  */
 
