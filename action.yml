@@ -1,6 +1,9 @@
 name: "Pending Response"
 description: "Add and remove `response` issue labels based on team membership."
 author: siegerts
+branding:
+  color: blue
+  icon: code
 inputs:
   github-token:
     description: The GitHub token used to create an authenticated client
