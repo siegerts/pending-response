@@ -1,8 +1,8 @@
-# Pending Response action
+# Pending Response action 🏀
 
-On issue comment by a non-repo member (memberAssociations), remove the `pendingResponseLabel`, if present.
+On issue comment by a non-repo member (`member-associations`), remove the `pending-response-label`, if present.
 
-Optionally, add a follow up label (actionableLabel) to indicate that an action is required by the team.
+Optionally, add a follow up label (`actionable-label`) to highlight that an action is required by the team.
 
 ## Inputs
 
