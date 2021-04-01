@@ -38,7 +38,7 @@ async function run() {
     core.getInput("member-associations") || "OWNER, MEMBER, COLLABORATOR"
   );
 
-  if (!memberAssociations?.length) {
+  if (!memberAssociations || !memberAssociations.length) {
     return core.setFailed(
       "At least one Comment Author Association is required."
     );

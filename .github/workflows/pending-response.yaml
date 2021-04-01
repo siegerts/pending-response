@@ -1,5 +1,7 @@
 name: pending-response
-on: issue_comment
+on:
+  issue_comment:
+    types: [created]
 
 jobs:
   issue_commented:

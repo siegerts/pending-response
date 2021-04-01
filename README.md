@@ -19,7 +19,9 @@ You can use the action by referencing the v1 branch:
 
 ```yaml
 name: pending-response
-on: issue_comment
+on:
+  issue_comment:
+    types: [created]
 
 jobs:
   issue_commented:
@@ -35,7 +37,9 @@ jobs:
 
 ```yaml
 name: pending-response
-on: issue_comment
+on:
+  issue_comment:
+    types: [created]
 
 jobs:
   issue_commented:
