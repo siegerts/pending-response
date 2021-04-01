@@ -6,12 +6,12 @@ Optionally, add a follow up label (actionableLabel) to indicate that an action i
 
 ## Inputs
 
-| Input                    | Default                         | Description                                                                                                                                                                                      |
-| ------------------------ | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `github-token`           |                                 | The GitHub token used to create an authenticated client                                                                                                                                          |
-| `member-associations`    | `"OWNER, MEMBER, COLLABORATOR"` | [Repository associations](https://docs.github.com/en/graphql/reference/enums#commentauthorassociation) that are considered part of the team. Separate multiple with commas (eg. "OWNER, MEMBER") |
-| `pending-response-label` |                                 | Label to remove indicating that a response is required for further action                                                                                                                        |
-| `actionable-label`       |                                 | Label added to highlight that a user has responded and a follow-up is required                                                                                                                   |
+| Input                    | Default                         | Required | Description                                                                                                                                                                                      |
+| ------------------------ | ------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `github-token`           |                                 | true     | The GitHub token used to create an authenticated client                                                                                                                                          |
+| `member-associations`    | `"OWNER, MEMBER, COLLABORATOR"` | false    | [Repository associations](https://docs.github.com/en/graphql/reference/enums#commentauthorassociation) that are considered part of the team. Separate multiple with commas (eg. "OWNER, MEMBER") |
+| `pending-response-label` |                                 | true     | Label to remove indicating that a response is required for further action                                                                                                                        |
+| `actionable-label`       |                                 | false    | Label added to highlight that a user has responded and a follow-up is required                                                                                                                   |
 
 ## Usage
 
