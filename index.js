@@ -55,8 +55,12 @@ async function run() {
   const isMember = memberAssociations.includes(commentAuthorAssociation);
   const labels = issue.labels || [];
 
+  const isPendingResponse = labels.some(
+    ({ name }) => name === pendingResponseLabel
+  );
+
   // not team member and includes pending response label
-  if (!isMember && labels.includes(pendingResponseLabel)) {
+  if (!isMember && isPendingResponse) {
     core.info(`Updating issue #${issue.number}...`);
     core.info(`--Removing <${pendingResponseLabel}> label...`);
 
