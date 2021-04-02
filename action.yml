@@ -1,5 +1,5 @@
-name: "Pending Response"
-description: "Add and remove `response` issue labels based on team membership."
+name: "Pending Response Follow Up"
+description: "Add and remove `response` issue labels on new comments based on team membership."
 author: siegerts
 branding:
   color: blue
