@@ -12,7 +12,6 @@ const wordsToArray = require("./wordsToArray");
  * to highlight that an action is required by the team.
  *
  */
-
 async function run() {
   const token = core.getInput("github-token", { required: true });
 

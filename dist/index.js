@@ -19,7 +19,6 @@ const wordsToArray = __nccwpck_require__(6688);
  * to highlight that an action is required by the team.
  *
  */
-
 async function run() {
   const token = core.getInput("github-token", { required: true });
 
