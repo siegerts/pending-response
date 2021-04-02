@@ -1,4 +1,4 @@
-# Pending Response action 🏀
+# Pending Response Follow Up action 🏀
 
 Remove a `pending-response-label` from an issue, if present, when a new issue comment is _created_ by a non-repo member (`member-associations`).
 
