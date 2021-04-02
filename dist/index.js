@@ -11,11 +11,12 @@ const core = __nccwpck_require__(2186);
 const wordsToArray = __nccwpck_require__(6688);
 
 /**
- * On issue comment by a non-repo member (memberAssociations),
- * remove the `pendingResponseLabel`, if present.
+ * Remove a `pending-response-label` from an issue,
+ * if present, when a new issue comment is _created_ by
+ * a non-repo member (`member-associations`).
  *
- * Optionally, add a follow up label (actionableLabel) to
- * indicate that an action is required by the team.
+ * Optionally, add a follow-up label (`actionable-label`)
+ * to highlight that an action is required by the team.
  *
  */
 
