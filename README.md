@@ -73,3 +73,25 @@ jobs:
           pending-response-label: pending-response
           actionable-label: follow-up
 ```
+
+### Skip action unless the label is present on the issue and it's not a PR
+
+Note: `contains(github.event.issue.labels.*.name, 'pending-response')` matches the label used in `pending-response-label` value.
+
+```diff
+  name: pending-response
+  on:
+    issue_comment:
+      types: [created]
+
+  jobs:
+    issue_commented:
++     if: ${{ !github.event.issue.pull_request  && contains(github.event.issue.labels.*.name, 'pending-response') }}
+      runs-on: ubuntu-latest
+      steps:
+        - uses: siegerts/pending-response@v1
+          with:
+            github-token: ${{ secrets.GITHUB_TOKEN }}
+            member-associations: "OWNER, MEMBER"
+            pending-response-label: pending-response
+```
